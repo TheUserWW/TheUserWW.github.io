@@ -30,6 +30,15 @@
       --background-color: #ffffff;
       --sidebar-background: #f8f9fa;
       --code-background: #f4f4f4;
+      
+      /* Dark Mode Colors */
+      --dark-bg: #0d1117;
+      --dark-text: #e2e8f0;
+      --dark-text-light: #c9d1d9;
+      --dark-sidebar-bg: #161b22;
+      --dark-border: #30363d;
+      --dark-accent: #3498db;
+      --dark-text-muted: #8b949e;
     }
     
     * {
@@ -45,43 +54,49 @@
     
     /* ===== DARK MODE STYLES ===== */
     body.dark-mode {
-      background-color: #0d1117 !important;
-      color: #ffffff !important;
+      background-color: var(--dark-bg) !important;
+      color: var(--dark-text) !important;
+    }
+    
+    /* Global Dark Mode Text Color Override */
+    body.dark-mode,
+    body.dark-mode * {
+      color: var(--dark-text) !important;
     }
     
     /* Sidebar Dark Mode - Complete Support */
     body.dark-mode .sidebar {
-      background-color: #161b22 !important;
-      border-right: 2px solid #30363d !important;
+      background-color: var(--dark-sidebar-bg) !important;
+      border-right: 2px solid var(--dark-border) !important;
     }
     
     body.dark-mode .sidebar-nav {
-      background-color: #161b22 !important;
+      background-color: var(--dark-sidebar-bg) !important;
     }
     
     body.dark-mode .sidebar-nav ul {
-      background-color: #161b22 !important;
+      background-color: var(--dark-sidebar-bg) !important;
     }
     
     body.dark-mode .sidebar-nav li {
-      color: #ffffff !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .sidebar-nav li a {
-      color: #e2e8f0 !important;
+      color: var(--dark-text-light) !important;
       border-radius: 4px;
       transition: all 0.2s ease;
     }
     
     body.dark-mode .sidebar-nav li a:hover {
-      background-color: #3498db !important;
-      color: white !important;
+      background-color: var(--dark-accent) !important;
+      color: #ffffff !important;
       transform: translateX(4px);
     }
     
     body.dark-mode .sidebar-nav li.active > a {
       background: linear-gradient(135deg, #3498db, #2980b9) !important;
-      color: white !important;
+      color: #ffffff !important;
       font-weight: bold;
       box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3) !important;
     }
@@ -94,7 +109,7 @@
     
     /* Sidebar Nested Items */
     body.dark-mode .sidebar-nav ul ul li a {
-      color: #c9d1d9 !important;
+      color: var(--dark-text-light) !important;
     }
     
     body.dark-mode .sidebar-nav ul ul li a:hover {
@@ -109,12 +124,12 @@
     
     /* Content Area Dark Mode */
     body.dark-mode .content {
-      color: #ffffff !important;
-      background-color: #0d1117 !important;
+      color: var(--dark-text) !important;
+      background-color: var(--dark-bg) !important;
     }
     
     body.dark-mode .markdown-section {
-      color: #ffffff !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .markdown-section h1,
@@ -124,40 +139,42 @@
     body.dark-mode .markdown-section h5,
     body.dark-mode .markdown-section h6 {
       color: #ffffff !important;
-      border-color: #3498db !important;
+      border-color: var(--dark-accent) !important;
     }
     
     body.dark-mode .markdown-section p {
-      color: #e2e8f0 !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .markdown-section code {
-      background-color: #161b22 !important;
+      background-color: var(--dark-sidebar-bg) !important;
       color: #79c0ff !important;
     }
     
     body.dark-mode .markdown-section pre {
-      background-color: #0d1117 !important;
-      color: #e2e8f0 !important;
-      border-left-color: #3498db !important;
+      background-color: var(--dark-sidebar-bg) !important;
+      color: var(--dark-text) !important;
+      border-left-color: var(--dark-accent) !important;
     }
     
     body.dark-mode .markdown-section pre code {
-      color: #e2e8f0 !important;
+      color: var(--dark-text) !important;
+      background-color: transparent !important;
     }
     
     body.dark-mode .markdown-section blockquote {
       background-color: rgba(52, 152, 219, 0.15) !important;
-      border-left-color: #3498db !important;
-      color: #c9d1d9 !important;
+      border-left-color: var(--dark-accent) !important;
+      color: var(--dark-text-light) !important;
     }
     
     body.dark-mode .markdown-section strong {
       color: #58a6ff !important;
+      font-weight: 600;
     }
     
     body.dark-mode .markdown-section em {
-      color: #e2e8f0 !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .markdown-section a {
@@ -169,21 +186,21 @@
     }
     
     body.dark-mode .markdown-section table {
-      border-color: #30363d !important;
+      border-color: var(--dark-border) !important;
     }
     
     body.dark-mode .markdown-section table thead {
-      background-color: #3498db !important;
+      background-color: var(--dark-accent) !important;
     }
     
     body.dark-mode .markdown-section table th {
-      background-color: #3498db !important;
-      color: white !important;
+      background-color: var(--dark-accent) !important;
+      color: #ffffff !important;
     }
     
     body.dark-mode .markdown-section table td {
-      border-color: #30363d !important;
-      color: #e2e8f0 !important;
+      border-color: var(--dark-border) !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .markdown-section table tr:hover {
@@ -192,26 +209,26 @@
     
     body.dark-mode .markdown-section ul,
     body.dark-mode .markdown-section ol {
-      color: #e2e8f0 !important;
+      color: var(--dark-text) !important;
     }
     
     body.dark-mode .markdown-section li {
-      color: #e2e8f0 !important;
+      color: var(--dark-text) !important;
     }
     
     /* Search Dark Mode */
     body.dark-mode .search {
-      background-color: #161b22 !important;
+      background-color: var(--dark-sidebar-bg) !important;
     }
     
     body.dark-mode .search input {
-      background-color: #0d1117 !important;
-      color: #e2e8f0 !important;
-      border-color: #30363d !important;
+      background-color: var(--dark-bg) !important;
+      color: var(--dark-text) !important;
+      border-color: var(--dark-border) !important;
     }
     
     body.dark-mode .search input::placeholder {
-      color: #8b949e !important;
+      color: var(--dark-text-muted) !important;
     }
     
     body.dark-mode .search .search-keyword {
@@ -219,7 +236,7 @@
     }
     
     body.dark-mode .search-result {
-      background-color: #161b22 !important;
+      background-color: var(--dark-sidebar-bg) !important;
     }
     
     body.dark-mode .search-result a {
@@ -232,8 +249,8 @@
     
     /* Copy Code Button Dark Mode */
     body.dark-mode .docsify-copy-code-button {
-      background-color: #3498db !important;
-      color: white !important;
+      background-color: var(--dark-accent) !important;
+      color: #ffffff !important;
     }
     
     body.dark-mode .docsify-copy-code-button:hover {
@@ -243,8 +260,8 @@
     /* Footer Dark Mode */
     body.dark-mode .footer {
       background: linear-gradient(135deg, #1a1a2e, #16213e) !important;
-      color: #e2e8f0 !important;
-      border-top-color: #30363d !important;
+      color: var(--dark-text) !important;
+      border-top-color: var(--dark-border) !important;
     }
     
     body.dark-mode .footer a {
@@ -581,7 +598,7 @@
       
       /* Footer */
       footer: {
-        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fab fa-codeforces"></i> Codeforces</a></span>',
+        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fab fa-code"></i> Codeforces</a></span>',
         auth: '',
         pre: '<hr/>',
         style: 'text-align: center; padding: 20px;'
