@@ -10,7 +10,7 @@ This page links to my competitive programming notes and source code in the repos
 - Solution note: [CF938D.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.md)
 - C++ source: [CF938D.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.cpp)
 
-### CF1195C - Tokitsukaze and Discard
+### CF1195C - Basketball Exercise
 
 - [Solution Page](CF1195C.md)
 - Solution note: [CF1195C.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.md)
