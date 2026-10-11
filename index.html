@@ -6,23 +6,349 @@
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
   <meta name="description" content="Personal competitive programming notes, algorithms, and coding templates.">
+  <meta name="keywords" content="competitive programming, algorithms, C++, data structures, codeforces">
+  <meta name="author" content="TheUserWW">
   
   <!-- Docsify Vue Theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
   <!-- KaTeX for LaTeX rendering -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  <!-- Font Awesome Icons -->
+  <link rel="stylesheet" href="//cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
   <style>
     :root {
+      /* Light Mode Colors */
       --primary-color: #2c3e50;
+      --secondary-color: #3498db;
       --text-color: #34495e;
       --border-color: #ecf0f1;
       --link-color: #3498db;
+      --background-color: #ffffff;
+      --sidebar-background: #f8f9fa;
+      --code-background: #f4f4f4;
+      
+      /* Dark Mode Colors */
+      --dark-primary: #1a1a1a;
+      --dark-secondary: #2d3748;
+      --dark-text: #e2e8f0;
+      --dark-link: #63b3ed;
+      --dark-background: #0d1117;
+      --dark-sidebar: #161b22;
+    }
+    
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+    
+    html, body {
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
+      line-height: 1.6;
+      color: var(--text-color);
+      background-color: var(--background-color);
+      transition: background-color 0.3s ease, color 0.3s ease;
+    }
+    
+    /* Dark Mode Toggle */
+    body.dark-mode {
+      background-color: var(--dark-background);
+      color: var(--dark-text);
+    }
+    
+    body.dark-mode .sidebar {
+      background-color: var(--dark-sidebar) !important;
+    }
+    
+    body.dark-mode .content {
+      color: var(--dark-text);
+    }
+    
+    /* Enhanced Sidebar */
+    .sidebar {
+      background-color: var(--sidebar-background);
+      border-right: 2px solid var(--border-color);
+      transition: all 0.3s ease;
+    }
+    
+    .sidebar ul li a {
+      color: var(--text-color);
+      border-radius: 4px;
+      transition: all 0.2s ease;
+      padding: 8px 12px;
+      display: block;
+    }
+    
+    .sidebar ul li a:hover {
+      background-color: var(--secondary-color);
+      color: white;
+      transform: translateX(4px);
+    }
+    
+    .sidebar ul li.active > a {
+      background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+      color: white;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+    }
+    
+    /* Enhanced Content Area */
+    .content {
+      padding: 40px;
+      max-width: 1000px;
+    }
+    
+    .markdown-section h1 {
+      font-size: 2.5em;
+      border-bottom: 3px solid var(--secondary-color);
+      padding-bottom: 15px;
+      margin-bottom: 30px;
+    }
+    
+    .markdown-section h2 {
+      font-size: 2em;
+      color: var(--primary-color);
+      margin-top: 30px;
+      margin-bottom: 15px;
+      border-left: 4px solid var(--secondary-color);
+      padding-left: 12px;
+    }
+    
+    .markdown-section h3 {
+      font-size: 1.5em;
+      color: var(--secondary-color);
+      margin-top: 20px;
+      margin-bottom: 10px;
+    }
+    
+    /* Code Block Styling */
+    .markdown-section code {
+      background-color: var(--code-background);
+      color: #d63384;
+      padding: 2px 6px;
+      border-radius: 3px;
+      font-size: 0.9em;
+    }
+    
+    .markdown-section pre {
+      background-color: var(--code-background);
+      border-left: 4px solid var(--secondary-color);
+      border-radius: 4px;
+      overflow-x: auto;
+    }
+    
+    .markdown-section pre > code {
+      background-color: transparent;
+      color: inherit;
+      padding: 0;
+    }
+    
+    /* Link Styling */
+    .markdown-section a {
+      color: var(--link-color);
+      text-decoration: none;
+      border-bottom: 2px solid transparent;
+      transition: all 0.2s ease;
+    }
+    
+    .markdown-section a:hover {
+      border-bottom-color: var(--link-color);
+    }
+    
+    /* Quote Styling */
+    .markdown-section blockquote {
+      border-left: 4px solid var(--secondary-color);
+      background-color: rgba(52, 152, 219, 0.1);
+      padding: 15px 20px;
+      margin: 20px 0;
+      border-radius: 4px;
+      font-style: italic;
+    }
+    
+    /* Table Styling */
+    .markdown-section table {
+      border-collapse: collapse;
+      width: 100%;
+      margin: 20px 0;
+    }
+    
+    .markdown-section table thead {
+      background-color: var(--secondary-color);
+      color: white;
+    }
+    
+    .markdown-section table th,
+    .markdown-section table td {
+      padding: 12px;
+      text-align: left;
+      border-bottom: 1px solid var(--border-color);
+    }
+    
+    .markdown-section table tr:hover {
+      background-color: rgba(52, 152, 219, 0.05);
+    }
+    
+    /* Back to Top Button */
+    #back-to-top {
+      position: fixed;
+      bottom: 30px;
+      right: 30px;
+      background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+      color: white;
+      width: 50px;
+      height: 50px;
+      border-radius: 50%;
+      display: none;
+      justify-content: center;
+      align-items: center;
+      cursor: pointer;
+      font-size: 20px;
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
+      transition: all 0.3s ease;
+      border: none;
+      z-index: 1000;
+    }
+    
+    #back-to-top:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 6px 16px rgba(52, 152, 219, 0.6);
+    }
+    
+    #back-to-top.show {
+      display: flex;
+    }
+    
+    /* Dark Mode Toggle Button */
+    .theme-toggle {
+      position: fixed;
+      top: 20px;
+      right: 20px;
+      background: var(--secondary-color);
+      color: white;
+      border: none;
+      width: 45px;
+      height: 45px;
+      border-radius: 50%;
+      cursor: pointer;
+      font-size: 18px;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+      z-index: 999;
+    }
+    
+    .theme-toggle:hover {
+      transform: scale(1.1);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.5);
+    }
+    
+    body.dark-mode .theme-toggle {
+      background-color: var(--dark-secondary);
+    }
+    
+    /* Loading Animation */
+    .loading-spinner {
+      display: inline-block;
+      width: 20px;
+      height: 20px;
+      border: 3px solid var(--border-color);
+      border-radius: 50%;
+      border-top-color: var(--secondary-color);
+      animation: spin 0.6s linear infinite;
+    }
+    
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+    
+    /* Footer Enhancement */
+    .footer {
+      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      color: white;
+      padding: 30px;
+      text-align: center;
+      margin-top: 40px;
+      border-top: 2px solid var(--border-color);
+    }
+    
+    .footer a {
+      color: #ecf0f1;
+      text-decoration: none;
+      transition: color 0.2s ease;
+    }
+    
+    .footer a:hover {
+      color: white;
+      text-decoration: underline;
+    }
+    
+    /* Navigation Bar */
+    nav.navbar {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
+    
+    /* Responsive Design */
+    @media (max-width: 768px) {
+      .content {
+        padding: 20px;
+      }
+      
+      #back-to-top {
+        width: 45px;
+        height: 45px;
+        bottom: 20px;
+        right: 20px;
+        font-size: 18px;
+      }
+      
+      .theme-toggle {
+        top: 10px;
+        right: 10px;
+        width: 40px;
+        height: 40px;
+        font-size: 16px;
+      }
+    }
+    
+    /* List Styling */
+    .markdown-section ul, 
+    .markdown-section ol {
+      margin-left: 20px;
+      margin-bottom: 15px;
+    }
+    
+    .markdown-section li {
+      margin-bottom: 8px;
+      line-height: 1.8;
+    }
+    
+    /* Emphasis Colors */
+    .markdown-section strong {
+      color: var(--secondary-color);
+      font-weight: 600;
+    }
+    
+    .markdown-section em {
+      color: var(--text-color);
+      font-style: italic;
     }
   </style>
 </head>
 <body>
-  <div id="app">Loading...</div>
+  <button id="theme-toggle" class="theme-toggle" title="Toggle Dark Mode">
+    <i class="fas fa-moon"></i>
+  </button>
+  
+  <div id="app">
+    <div class="loading-spinner"></div> Loading...
+  </div>
+  
+  <button id="back-to-top" title="Back to Top">
+    <i class="fas fa-arrow-up"></i>
+  </button>
   
   <script>
     window.$docsify = {
@@ -30,46 +356,117 @@
       nameLink: '/',
       repo: 'https://github.com/TheUserWW/TheUserWW.github.io',
       loadSidebar: true,
+      loadNavbar: false,
       subMaxLevel: 3,
       auto2top: true,
       maxLevel: 4,
       
-      // Search Configuration (English)
+      /* Search Configuration (English) */
       search: {
-        placeholder: 'Search topics or algorithms...',
-        noData: 'No results found',
+        placeholder: 'Search topics, algorithms, or keywords...',
+        noData: 'No matching results found. Try different keywords.',
         depth: 4,
-        hideOtherSidebarContent: false
+        hideOtherSidebarContent: false,
+        accent: true
       },
       
-      // Code Copy Button (English)
+      /* Code Copy Button (English) */
       copyCode: {
-        buttonText: 'Copy',
-        errorText: 'Error',
+        buttonText: 'Copy Code',
+        errorText: 'Copy Failed',
         successText: 'Copied!'
       },
       
-      // Footer
+      /* Footer */
       footer: {
-        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank">GitHub</a></span>',
+        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fas fa-code"></i> Codeforces</a></span>',
         auth: '',
         pre: '<hr/>',
-        style: 'text-align: center; padding: 20px;'
-      }
+        style: 'text-align: center; padding: 20px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; border-top: 2px solid #ecf0f1;'
+      },
+      
+      /* Plugins Configuration */
+      plugins: [
+        function(hook) {
+          hook.beforeEach(function(html) {
+            return html;
+          });
+          hook.afterEach(function(html) {
+            return html;
+          });
+        }
+      ]
     }
   </script>
 
   <!-- Docsify Core -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
+  
   <!-- Full Text Search Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+  
   <!-- Code Copy Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+  
   <!-- C++ Syntax Highlighting -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-c.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-python.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-java.min.js"></script>
+  
   <!-- LaTeX Math Formula Rendering -->
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@1.4.5/dist/docsify-katex.js"></script>
+  
   <!-- Footer Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
+  
+  <!-- Dark Mode & Enhanced Features Script -->
+  <script>
+    // Dark Mode Toggle
+    const themeToggle = document.getElementById('theme-toggle');
+    const backToTop = document.getElementById('back-to-top');
+    
+    // Load saved theme preference
+    const savedTheme = localStorage.getItem('theme') || 'light';
+    if (savedTheme === 'dark') {
+      document.body.classList.add('dark-mode');
+      themeToggle.innerHTML = '<i class="fas fa-sun"></i>';
+    }
+    
+    // Toggle theme
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('dark-mode');
+      const isDark = document.body.classList.contains('dark-mode');
+      localStorage.setItem('theme', isDark ? 'dark' : 'light');
+      themeToggle.innerHTML = isDark ? '<i class="fas fa-sun"></i>' : '<i class="fas fa-moon"></i>';
+    });
+    
+    // Back to Top Button
+    window.addEventListener('scroll', () => {
+      if (window.scrollY > 300) {
+        backToTop.classList.add('show');
+      } else {
+        backToTop.classList.remove('show');
+      }
+    });
+    
+    backToTop.addEventListener('click', () => {
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    });
+    
+    // Keyboard shortcuts
+    document.addEventListener('keydown', (e) => {
+      // Ctrl+/ or Cmd+/ to focus search
+      if ((e.ctrlKey || e.metaKey) && e.key === '/') {
+        e.preventDefault();
+        const searchInput = document.querySelector('.search input');
+        if (searchInput) searchInput.focus();
+      }
+      // Esc to go back to top
+      if (e.key === 'Escape') {
+        backToTop.click();
+      }
+    });
+  </script>
 </body>
 </html>
