@@ -4,8 +4,9 @@ This page links to my competitive programming notes and source code in the repos
 
 ## Codeforces Solutions
 
-### CF938D - Buying Firewood
+### CF938D - Buy a Ticket
 
+- [Solution Page](CF938D.md)
 - Solution note: [CF938D.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.md)
 - C++ source: [CF938D.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.cpp)
 
