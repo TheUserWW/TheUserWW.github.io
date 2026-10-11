@@ -11,6 +11,7 @@
 
 * **🎯 Practice & Contests**
   * 🏆 [Codeforces 2026-10-10](./Contests/2026-10-10/notes.md)
+  * 🔥 [Codeforces Solutions](./Solutions/Codeforces/index.md)
   * 📝 [Practice Problems](./Practice/index.md)
   * 💡 [Problem Solutions](./Solutions/index.md)
   * 🎓 [Contest Analysis](./Analysis/index.md)
