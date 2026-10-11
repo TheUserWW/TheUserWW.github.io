@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Codeforces 1195 C. Basketball Exercise</title>
+    <script src="https://polyfill.io/v3/polyfill.min.js?features=es6"></script>
+    <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-mml-chtml.js"></script>
+    <style>
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 20px;
+            background-color: #f5f5f5;
+            color: #333;
+        }
+        h1, h2, h3 {
+            color: #2c3e50;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+        h1 {
+            border-bottom: 3px solid #3498db;
+            padding-bottom: 10px;
+        }
+        h2 {
+            border-left: 4px solid #3498db;
+            padding-left: 10px;
+        }
+        a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        code {
+            background-color: #ecf0f1;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-family: 'Courier New', monospace;
+            font-size: 0.9em;
+        }
+        pre {
+            background-color: #2c3e50;
+            color: #ecf0f1;
+            padding: 15px;
+            border-radius: 5px;
+            overflow-x: auto;
+            line-height: 1.4;
+        }
+        pre code {
+            background-color: transparent;
+            padding: 0;
+            color: inherit;
+        }
+        .highlight {
+            background-color: #fff3cd;
+            padding: 1px 4px;
+            border-radius: 3px;
+        }
+        table {
+            border-collapse: collapse;
+            width: 100%;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 12px;
+            text-align: left;
+        }
+        th {
+            background-color: #3498db;
+            color: white;
+        }
+        .note {
+            background-color: #e8f4f8;
+            border-left: 4px solid #3498db;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+        .warning {
+            background-color: #fff3cd;
+            border-left: 4px solid #ffc107;
+            padding: 10px 15px;
+            margin: 15px 0;
+        }
+    </style>
+</head>
+<body>
+    <h1><a href="https://codeforces.com/contest/1195/problem/C">Codeforces 1195 C. Basketball Exercise</a></h1>
+
+    <p>This is a very typical dynamic programming problem. In this write-up, I will show three ways to solve it using dynamic programming.</p>
+
+    <hr>
+
+    <h2>Problem Analysis</h2>
+
+    <p>First, we need to analyze the problem carefully. According to the statement, there are four restrictions we must respect when choosing students:</p>
+
+    <ol>
+        <li>We choose players from left to right.</li>
+        <li>The index of each chosen player (except the first one) must be strictly greater than the index of the previous player.</li>
+        <li>Demid chooses students such that no two consecutive chosen students belong to the same row.</li>
+        <li>The total height of all chosen students must be as large as possible.</li>
+    </ol>
+
+    <p>Given these conditions, we can try to define the states for dynamic programming.</p>
+
+    <p>When designing a DP state, we must ensure that it satisfies two important properties:</p>
+
+    <ol>
+        <li>The state clearly reflects the restrictions above.</li>
+        <li>The state is independent of the future.</li>
+    </ol>
+
+    <p>The second condition is especially important, because the core idea of dynamic programming is to derive the optimal result from the optimal previous state. In other words, we need to make sure that the decision at each step does not affect the structure of future decisions.</p>
+
+    <hr>
+
+    <h2>First Solution</h2>
+
+    <p>Let us make the problem simpler. Since we can only choose people from left to right, one intuitive idea is to define <code>dp[i]</code>, meaning the best possible combination when we reach the <code>i</code>-th position.</p>
+
+    <p>However, we also need to know which row the last chosen student came from. Therefore, a better state is <code>dp[i][j]</code>.</p>
+
+    <p>We define <code>dp[i][j]</code> as:</p>
+
+    <ul>
+        <li>when we are at index <code>i</code>,</li>
+        <li>what is the optimal result if we choose operation <code>j</code>.</li>
+    </ul>
+
+    <p>Here, <code>j</code> is an integer in <code>[0, 2]</code>:</p>
+
+    <ul>
+        <li><code>j = 0</code>: pick a student from row A</li>
+        <li><code>j = 1</code>: pick a student from row B</li>
+        <li><code>j = 2</code>: skip the current position</li>
+    </ul>
+
+    <p>The meaning of <code>dp[i][j]</code> is the maximum total height we can obtain when we reach index <code>i</code> and perform operation <code>j</code>.</p>
+
+    <p>At the end, the answer is:</p>
+
+    <pre><code class="language-cpp">max(dp[n][0], dp[n][1], dp[n][2])</code></pre>
+
+    <hr>
+
+    <h2>State Transition</h2>
+
+    <p>Once we define the state, the next step is to derive the transition equation.</p>
+
+    <p>This part is fairly straightforward once the state is chosen. At least for this problem, the main work is just simulation.</p>
+
+    <p>A good approach is to start by writing the base cases.</p>
+
+    <h3>Base case: <code>i = 0</code></h3>
+
+    <p>The answer is obvious: if <code>i = 0</code>, then no one has been chosen yet, so:</p>
+
+    <pre><code class="language-cpp">dp[0][0] = 0
+dp[0][1] = 0
+dp[0][2] = 0</code></pre>
+
+    <h3>Base case: <code>i = 1</code></h3>
+
+    <p>This means we are deciding what to do for the first student.</p>
+
+    <ul>
+        <li>If we choose a player from row A, we get the first student from row A:
+            <pre><code class="language-cpp">dp[1][0] = rowA[0]</code></pre>
+        </li>
+        <li>If we choose a player from row B, we get the first student from row B:
+            <pre><code class="language-cpp">dp[1][1] = rowB[0]</code></pre>
+        </li>
+        <li>If we skip the first student:
+            <pre><code class="language-cpp">dp[1][2] = 0</code></pre>
+        </li>
+    </ul>
+
+    <hr>
+
+    <h2>General Case</h2>
+
+    <p>Now let us consider the general case <code>i</code>.</p>
+
+    <h3>For <code>dp[i][0]</code></h3>
+
+    <p>If we pick a player from row A at index <code>i</code>, then the transition must look like:</p>
+
+    <pre><code class="language-cpp">a[i] + max(...)</code></pre>
+
+    <p>This means: we add the height of the current student and then take the best previous value that does not violate the rule that consecutive chosen students cannot come from the same row.</p>
+
+    <p>Since we picked from row A, the previous chosen student must not be from row A. Therefore, the previous state cannot be <code>dp[i-1][0]</code>.</p>
+
+    <p>The valid previous options are:</p>
+
+    <ul>
+        <li><code>dp[i-1][1]</code></li>
+        <li><code>dp[i-2][0]</code></li>
+        <li><code>dp[i-1][2]</code></li>
+    </ul>
+
+    <p>Thus, the transition is:</p>
+
+    <p>$$dp[i][0] = \max(dp[i-1][1],\ dp[i-2][0],\ dp[i-1][2]) + rowA[i-1]$$</p>
+
+    <h3>For <code>dp[i][1]</code></h3>
+
+    <p>Similarly, if we pick a player from row B, then:</p>
+
+    <p>$$dp[i][1] = \max(dp[i-2][1],\ dp[i-1][0],\ dp[i-1][2]) + rowB[i-1]$$</p>
+
+    <h3>For <code>dp[i][2]</code></h3>
+
+    <p>Skipping a player imposes no restriction, so:</p>
+
+    <p>$$dp[i][2] = \max(dp[i-1][0],\ dp[i-1][1],\ dp[i-1][2])$$</p>
+
+    <p>The reason I use <code>rowA[i-1]</code> and <code>rowB[i-1]</code> is that I use 1-based indexing for the DP array, while the original arrays are 0-based.</p>
+
+    <hr>
+
+    <h2>C++ Implementation</h2>
+
+    <pre><code class="language-cpp">#include &lt;bits/stdc++.h&gt;
+using namespace std;
+
+#define ll long long
+#define i128 __int128
+#define vl vector&lt;ll&gt;
+#define vb vector&lt;bool&gt;
+#define vec vector
+#define umap unordered_map
+#define uset unordered_set
+#define all(v) v.begin(), v.end()
+#define rall(v) v.rbegin(), v.rend()
+#define init(n) ll n; cin &gt;&gt; n;
+#define printVec(v) for (int i = 0; i &lt; v.size(); i++) cout &lt;&lt; v[i] &lt;&lt; " ";
+#define printlnVec(v) for (int i = 0; i &lt; v.size(); i++) cout &lt;&lt; v[i] &lt;&lt; " "; cout &lt;&lt; "\n";
+
+void setIO(string name = "") {
+    ios_base::sync_with_stdio(0);
+    cin.tie(nullptr);
+    if (!name.empty()) {
+        freopen((name + ".in").c_str(), "r", stdin);
+        freopen((name + ".out").c_str(), "w", stdout);
+    }
+}
+
+int main() {
+    setIO();
+    int n;
+    cin &gt;&gt; n;
+
+    vector&lt;ll&gt; rowA(n), rowB(n);
+
+    for (ll i = 0; i &lt; n; i++) {
+        cin &gt;&gt; rowA[i];
+    }
+    for (ll i = 0; i &lt; n; i++) {
+        cin &gt;&gt; rowB[i];
+    }
+
+    vector&lt;vector&lt;ll&gt;&gt; dp(n + 1, vector&lt;ll&gt;(3, 0));
+
+    dp[0][0] = 0; // pick from row A
+    dp[0][1] = 0; // pick from row B
+    dp[0][2] = 0; // skip
+
+    dp[1][0] = rowA[0];
+    dp[1][1] = rowB[0];
+    dp[1][2] = 0;
+
+    for (ll i = 2; i &lt;= n; i++) {
+        dp[i][0] = max({dp[i - 1][1], dp[i - 2][0], dp[i - 1][2]}) + rowA[i - 1];
+        dp[i][1] = max({dp[i - 2][1], dp[i - 1][0], dp[i - 1][2]}) + rowB[i - 1];
+        dp[i][2] = max({dp[i - 1][0], dp[i - 1][1], dp[i - 1][2]});
+    }
+
+    cout &lt;&lt; max(dp[n][0], max(dp[n][1], dp[n][2])) &lt;&lt; '\n';
+    return 0;
+}
+</code></pre>
+
+    <p>This code follows exactly the DP we discussed above.</p>
+
+    <h3>Complexity</h3>
+
+    <ul>
+        <li>Time complexity: <code>O(n)</code></li>
+        <li>Space complexity: <code>O(3n)</code></li>
+    </ul>
+
+    <p>This is already efficient enough to pass the problem, although it is not the most space-optimized version.</p>
+
+    <hr>
+
+    <h2>Can We Reduce the Number of States?</h2>
+
+    <p>The code above uses 3 states, but we can actually reduce it to 2.</p>
+
+    <p>Why is <code>dp[i][2]</code> unnecessary?</p>
+
+    <p>Because skipping a position can be absorbed into a better state representation.</p>
+
+    <hr>
+
+    <h2>Why <code>dp[i][2]</code> Can Be Removed</h2>
+
+    <p>Let us write:</p>
+
+    <ul>
+        <li><code>A_i = dp[i][0]</code></li>
+        <li><code>B_i = dp[i][1]</code></li>
+        <li><code>C_i = dp[i][2]</code></li>
+    </ul>
+
+    <p>The original transitions are:</p>
+
+    <p>$$A_i = \max(B_{i-1},\ A_{i-2},\ C_{i-1}) + rowA[i-1]$$</p>
+
+    <p>$$B_i = \max(A_{i-1},\ B_{i-2},\ C_{i-1}) + rowB[i-1]$$</p>
+
+    <p>$$C_i = \max(A_{i-1},\ B_{i-1},\ C_{i-1})$$</p>
+
+    <p>We claim that we can rewrite the first two equations without <code>C</code>.</p>
+
+    <h3>Step 1: Expand <code>C_{i-1}</code></h3>
+
+    <p>For any index <code>k ≥ 1</code>:</p>
+
+    <p>$$C_k = \max(A_{k-1},\ B_{k-1},\ C_{k-1})$$</p>
+
+    <p>Applying this to <code>k = i-1</code> gives:</p>
+
+    <p>$$C_{i-1} = \max(A_{i-2},\ B_{i-2},\ C_{i-2})$$</p>
+
+    <h3>Step 2: Substitute into <code>A_i</code></h3>
+
+    <p>Let:</p>
+
+    <p>$$M = \max(B_{i-1},\ A_{i-2},\ C_{i-1})$$</p>
+
+    <p>Substitute the expression for <code>C_{i-1}</code>:</p>
+
+    <p>$$M = \max(B_{i-1},\ A_{i-2},\ \max(A_{i-2},\ B_{i-2},\ C_{i-2}))$$</p>
+
+    <p>Since <code>max(x, x) = x</code>, we can simplify this to:</p>
+
+    <p>$$M = \max(B_{i-1},\ A_{i-2},\ B_{i-2},\ C_{i-2})$$</p>
+
+    <p>The key observation is that <code>C_{i-2}</code> is never useful because it is always dominated by an existing term.</p>
+
+    <h3>Step 3: A Useful Lemma</h3>
+
+    <p>For all <code>k ≥ 1</code>:</p>
+
+    <p>$$C_{k-1} \le B_k \quad \text{and} \quad C_{k-1} \le A_k$$</p>
+
+    <p>Why?</p>
+
+    <p>From the transition for <code>B_k</code>:</p>
+
+    <p>$$B_k = \max(A_{k-1},\ B_{k-2},\ C_{k-1}) + rowB[k-1]$$</p>
+
+    <p>Since heights are positive, we have:</p>
+
+    <p>$$B_k \ge C_{k-1}$$</p>
+
+    <p>The same argument applies to <code>A_k</code>.</p>
+
+    <p>So a skip is never better than choosing a positive-height student in the same prefix.</p>
+
+    <h3>Step 4: Remove <code>C_{i-2}</code></h3>
+
+    <p>Since:</p>
+
+    <p>$$C_{i-2} \le B_{i-1}$$</p>
+
+    <p>we can safely drop <code>C_{i-2}</code> from the maximum. Therefore:</p>
+
+    <p>$$A_i = \max(A_{i-2},\ B_{i-1},\ B_{i-2}) + rowA[i-1]$$</p>
+
+    <p>By symmetry, we also get:</p>
+
+    <p>$$B_i = \max(B_{i-2},\ A_{i-1},\ A_{i-2}) + rowB[i-1]$$</p>
+
+    <p>So the skip state is no longer necessary.</p>
+
+    <hr>
+
+    <h2>Final Answer Without <code>C</code></h2>
+
+    <p>The original answer was:</p>
+
+    <p>$$\max(A_n,\ B_n,\ C_n)$$</p>
+
+    <p>But since <code>C_n</code> is dominated by <code>A_n</code> or <code>B_n</code>, we can simply take:</p>
+
+    <p>$$\max(A_n,\ B_n,\ A_{n-1},\ B_{n-1})$$</p>
+
+    <p>With <code>n ≥ 1</code> and <code>A_0 = B_0 = 0</code>, the final answer is just:</p>
+
+    <p>$$\max(A_n,\ B_n)$$</p>
+
+    <p>or, depending on the exact implementation, you may keep the previous values to avoid edge-case mistakes.</p>
+
+    <hr>
+
+    <h2>Optimized 2-State DP</h2>
+
+    <p>Here is the optimized implementation:</p>
+
+    <pre><code class="language-cpp">vector&lt;vector&lt;ll&gt;&gt; dp(n + 1, vector&lt;ll&gt;(2, 0));
+
+dp[0][0] = 0; // pick from row A
+dp[0][1] = 0; // pick from row B
+
+dp[1][0] = rowA[0];
+dp[1][1] = rowB[0];
+
+ll ans = max(dp[1][0], dp[1][1]);
+
+for (ll i = 2; i &lt;= n; i++) {
+    dp[i][0] = max({dp[i - 2][0], dp[i - 1][1], dp[i - 2][1]}) + rowA[i - 1];
+    dp[i][1] = max({dp[i - 1][0], dp[i - 2][1], dp[i - 2][0]}) + rowB[i - 1];
+    ans = max({ans, dp[i][1], dp[i][0]});
+}
+
+cout &lt;&lt; ans &lt;&lt; '\n';
+</code></pre>
+
+    <p>This version keeps only the two meaningful states and avoids the unnecessary skip state.</p>
+
+    <hr>
+
+    <h2>Further Optimization: O(1) Space Complexity</h2>
+
+    <p>We can further optimize the space complexity to <code>O(1)</code> using a rolling array, since we don't need to store all previous computation results.</p>
+
+    <pre><code class="language-cpp">int main() {
+    setIO();
+    int n;
+    cin &gt;&gt; n;
+    vector&lt;ll&gt; rowA(n), rowB(n);
+    for(ll i = 0; i &lt; n; i++) {
+        cin &gt;&gt; rowA[i];
+    }
+    for(ll i = 0; i &lt; n; i++) {
+        cin &gt;&gt; rowB[i];
+    }
+
+    if (n == 1) {
+        cout &lt;&lt; max(rowA[0], rowB[0]) &lt;&lt; endl;
+        return 0;
+    }
+    
+    vector&lt;vector&lt;ll&gt;&gt; dp(2, vector&lt;ll&gt;(2, 0));
+    dp[0][0] = 0;          
+    dp[0][1] = 0;
+    dp[1][0] = rowA[0];
+    dp[1][1] = rowB[0];
+
+    for (ll i = 2; i &lt;= n; i++) {
+        ll cur_0 = max({dp[i % 2][0], dp[(i - 1) % 2][1], dp[i % 2][1]}) + rowA[i - 1];
+        ll cur_1 = max({dp[(i - 1) % 2][0], dp[i % 2][1], dp[i % 2][0]}) + rowB[i - 1];
+        dp[i % 2][0] = cur_0;
+        dp[i % 2][1] = cur_1;
+    }
+
+    cout &lt;&lt; max({dp[0][0], dp[0][1], dp[1][0], dp[1][1]}) &lt;&lt; endl;
+    return 0;
+}
+</code></pre>
+
+    <p>This final version optimizes both time and space complexity to the maximum extent possible.</p>
+
+    <hr>
+
+    <footer>
+        <p><small>Source: <a href="https://github.com/TheUserWW/CompetitiveProgramming/blob/bce8a8ddab23c80e02549da76ec5984171f2d217/CodeForces/CF1195C.md">GitHub Repository</a></small></p>
+    </footer>
+</body>
+</html>
