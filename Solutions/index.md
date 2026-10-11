@@ -12,6 +12,8 @@ This page links to my competitive programming notes and source code in the repos
 
 ### CF1195C - Tokitsukaze and Discard
 
+- [Solution Page](CF1195C.md)
+- Solution note: [CF1195C.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.md)
 - C++ source: [CF1195C.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.cpp)
 
 ### CF977E - Cyclic Components
