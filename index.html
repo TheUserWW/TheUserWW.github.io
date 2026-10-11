@@ -1,48 +1,75 @@
 <!DOCTYPE html>
-<html lang="zh-CN">
+<html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>TheUserWW's Competitive Programming Notes</title>
+  <title>TheUserWW - Competitive Programming Notes</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <meta name="description" content="Personal competitive programming notes, algorithms, and coding templates.">
   
-  <!-- 官方 Vue 主题样式 -->
+  <!-- Docsify Vue Theme -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
-  <!-- Katex 数学公式 CSS (用于 LaTeX 公式渲染) -->
+  <!-- KaTeX for LaTeX rendering -->
   <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@0.16.8/dist/katex.min.css">
+  
+  <style>
+    :root {
+      --primary-color: #2c3e50;
+      --text-color: #34495e;
+      --border-color: #ecf0f1;
+      --link-color: #3498db;
+    }
+  </style>
 </head>
 <body>
-  <div id="app">加载中...</div>
+  <div id="app">Loading...</div>
   
   <script>
     window.$docsify = {
       name: 'TheUserWW CP Notes',
+      nameLink: '/',
       repo: 'https://github.com/TheUserWW/TheUserWW.github.io',
-      loadSidebar: true,      // 开启左侧边栏
-      subMaxLevel: 3,         // 自动提取 MD 标题到侧边栏
-      auto2top: true,         // 切换页面自动回到顶部
-      search: {               // 开启全文搜索功能
-        placeholder: '搜索题目或算法...',
-        noData: '未找到结果',
-        depth: 4
+      loadSidebar: true,
+      subMaxLevel: 3,
+      auto2top: true,
+      maxLevel: 4,
+      
+      // Search Configuration (English)
+      search: {
+        placeholder: 'Search topics or algorithms...',
+        noData: 'No results found',
+        depth: 4,
+        hideOtherSidebarContent: false
       },
-      copyCode: {             // 代码块一键复制按钮
-        buttonText: '复制',
-        errorText: '错误',
-        successText: '已复制'
+      
+      // Code Copy Button (English)
+      copyCode: {
+        buttonText: 'Copy',
+        errorText: 'Error',
+        successText: 'Copied!'
+      },
+      
+      // Footer
+      footer: {
+        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank">GitHub</a></span>',
+        auth: '',
+        pre: '<hr/>',
+        style: 'text-align: center; padding: 20px;'
       }
     }
   </script>
 
-  <!-- Docsify 核心脚本 -->
+  <!-- Docsify Core -->
   <script src="//cdn.jsdelivr.net/npm/docsify@4/lib/docsify.min.js"></script>
-  <!-- 全文搜索插件 -->
+  <!-- Full Text Search Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
-  <!-- 代码一键复制插件 -->
+  <!-- Code Copy Plugin -->
   <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
-  <!-- C++ 代码高亮插件 -->
+  <!-- C++ Syntax Highlighting -->
   <script src="//cdn.jsdelivr.net/npm/prismjs@1/components/prism-cpp.min.js"></script>
-  <!-- LaTeX 数学公式渲染插件 -->
+  <!-- LaTeX Math Formula Rendering -->
   <script src="//cdn.jsdelivr.net/npm/docsify-katex@1.4.5/dist/docsify-katex.js"></script>
+  <!-- Footer Plugin -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-footer-enh/dist/docsify-footer-enh.min.js"></script>
 </body>
 </html>
