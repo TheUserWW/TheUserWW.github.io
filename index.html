@@ -219,34 +219,39 @@
       display: flex;
     }
     
-    /* Dark Mode Toggle Button */
+    /* Dark Mode Toggle Button - Bottom Right */
     .theme-toggle {
       position: fixed;
-      top: 20px;
-      right: 20px;
+      bottom: 30px;
+      right: 90px;
       background: var(--secondary-color);
       color: white;
       border: none;
-      width: 45px;
-      height: 45px;
+      width: 50px;
+      height: 50px;
       border-radius: 50%;
       cursor: pointer;
-      font-size: 18px;
+      font-size: 20px;
       display: flex;
       justify-content: center;
       align-items: center;
       transition: all 0.3s ease;
-      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
+      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.4);
       z-index: 999;
     }
     
     .theme-toggle:hover {
-      transform: scale(1.1);
-      box-shadow: 0 4px 12px rgba(52, 152, 219, 0.5);
+      transform: scale(1.1) rotateZ(20deg);
+      box-shadow: 0 6px 16px rgba(52, 152, 219, 0.6);
     }
     
     body.dark-mode .theme-toggle {
-      background-color: var(--dark-secondary);
+      background-color: #f39c12;
+      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+    }
+    
+    body.dark-mode .theme-toggle:hover {
+      box-shadow: 0 6px 16px rgba(243, 156, 18, 0.6);
     }
     
     /* Loading Animation */
@@ -305,11 +310,11 @@
       }
       
       .theme-toggle {
-        top: 10px;
-        right: 10px;
-        width: 40px;
-        height: 40px;
-        font-size: 16px;
+        bottom: 20px;
+        right: 75px;
+        width: 45px;
+        height: 45px;
+        font-size: 18px;
       }
     }
     
