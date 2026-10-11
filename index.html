@@ -43,39 +43,75 @@
     /* ===== DARK MODE STYLES ===== */
     body.dark-mode {
       background-color: #0d1117 !important;
-      color: #e2e8f0 !important;
+      color: #ffffff !important;
     }
     
+    /* Sidebar Dark Mode - Complete Support */
     body.dark-mode .sidebar {
       background-color: #161b22 !important;
-      border-right-color: #30363d !important;
+      border-right: 2px solid #30363d !important;
     }
     
     body.dark-mode .sidebar-nav {
-      background-color: #0d1117 !important;
+      background-color: #161b22 !important;
+    }
+    
+    body.dark-mode .sidebar-nav ul {
+      background-color: #161b22 !important;
+    }
+    
+    body.dark-mode .sidebar-nav li {
+      color: #ffffff !important;
     }
     
     body.dark-mode .sidebar-nav li a {
-      color: #c9d1d9 !important;
+      color: #e2e8f0 !important;
+      border-radius: 4px;
+      transition: all 0.2s ease;
     }
     
     body.dark-mode .sidebar-nav li a:hover {
       background-color: #3498db !important;
       color: white !important;
+      transform: translateX(4px);
     }
     
     body.dark-mode .sidebar-nav li.active > a {
       background: linear-gradient(135deg, #3498db, #2980b9) !important;
       color: white !important;
+      font-weight: bold;
+      box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3) !important;
     }
     
+    /* Sidebar Title/Name in Dark Mode */
+    body.dark-mode .sidebar-nav > ul > li:first-child > a {
+      color: #58a6ff !important;
+      font-weight: bold;
+    }
+    
+    /* Sidebar Nested Items */
+    body.dark-mode .sidebar-nav ul ul li a {
+      color: #c9d1d9 !important;
+    }
+    
+    body.dark-mode .sidebar-nav ul ul li a:hover {
+      background-color: rgba(52, 152, 219, 0.3) !important;
+      color: #ffffff !important;
+    }
+    
+    body.dark-mode .sidebar-nav ul ul li.active > a {
+      background: linear-gradient(135deg, #3498db, #2980b9) !important;
+      color: #ffffff !important;
+    }
+    
+    /* Content Area Dark Mode */
     body.dark-mode .content {
-      color: #e2e8f0 !important;
+      color: #ffffff !important;
       background-color: #0d1117 !important;
     }
     
     body.dark-mode .markdown-section {
-      color: #e2e8f0 !important;
+      color: #ffffff !important;
     }
     
     body.dark-mode .markdown-section h1,
@@ -84,8 +120,12 @@
     body.dark-mode .markdown-section h4,
     body.dark-mode .markdown-section h5,
     body.dark-mode .markdown-section h6 {
-      color: #e2e8f0 !important;
+      color: #ffffff !important;
       border-color: #3498db !important;
+    }
+    
+    body.dark-mode .markdown-section p {
+      color: #e2e8f0 !important;
     }
     
     body.dark-mode .markdown-section code {
@@ -99,10 +139,22 @@
       border-left-color: #3498db !important;
     }
     
+    body.dark-mode .markdown-section pre code {
+      color: #e2e8f0 !important;
+    }
+    
     body.dark-mode .markdown-section blockquote {
       background-color: rgba(52, 152, 219, 0.15) !important;
       border-left-color: #3498db !important;
-      color: #a8b9d9 !important;
+      color: #c9d1d9 !important;
+    }
+    
+    body.dark-mode .markdown-section strong {
+      color: #58a6ff !important;
+    }
+    
+    body.dark-mode .markdown-section em {
+      color: #e2e8f0 !important;
     }
     
     body.dark-mode .markdown-section a {
@@ -117,6 +169,10 @@
       border-color: #30363d !important;
     }
     
+    body.dark-mode .markdown-section table thead {
+      background-color: #3498db !important;
+    }
+    
     body.dark-mode .markdown-section table th {
       background-color: #3498db !important;
       color: white !important;
@@ -124,10 +180,25 @@
     
     body.dark-mode .markdown-section table td {
       border-color: #30363d !important;
+      color: #e2e8f0 !important;
     }
     
     body.dark-mode .markdown-section table tr:hover {
       background-color: rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    body.dark-mode .markdown-section ul,
+    body.dark-mode .markdown-section ol {
+      color: #e2e8f0 !important;
+    }
+    
+    body.dark-mode .markdown-section li {
+      color: #e2e8f0 !important;
+    }
+    
+    /* Search Dark Mode */
+    body.dark-mode .search {
+      background-color: #161b22 !important;
     }
     
     body.dark-mode .search input {
@@ -144,6 +215,29 @@
       color: #ffa657 !important;
     }
     
+    body.dark-mode .search-result {
+      background-color: #161b22 !important;
+    }
+    
+    body.dark-mode .search-result a {
+      color: #58a6ff !important;
+    }
+    
+    body.dark-mode .search-result a:hover {
+      color: #79c0ff !important;
+    }
+    
+    /* Copy Code Button Dark Mode */
+    body.dark-mode .docsify-copy-code-button {
+      background-color: #3498db !important;
+      color: white !important;
+    }
+    
+    body.dark-mode .docsify-copy-code-button:hover {
+      background-color: #2980b9 !important;
+    }
+    
+    /* Footer Dark Mode */
     body.dark-mode .footer {
       background: linear-gradient(135deg, #1a1a2e, #16213e) !important;
       color: #e2e8f0 !important;
@@ -158,7 +252,7 @@
       color: #79c0ff !important;
     }
     
-    /* Enhanced Sidebar */
+    /* Enhanced Sidebar - Light Mode */
     .sidebar {
       background-color: #f8f9fa;
       border-right: 2px solid #ecf0f1;
@@ -190,6 +284,7 @@
     .content {
       padding: 40px;
       max-width: 1000px;
+      color: #34495e;
     }
     
     .markdown-section h1 {
@@ -214,6 +309,10 @@
       color: #3498db;
       margin-top: 20px;
       margin-bottom: 10px;
+    }
+    
+    .markdown-section p {
+      color: #34495e;
     }
     
     /* Code Block Styling */
@@ -258,6 +357,7 @@
       margin: 20px 0;
       border-radius: 4px;
       font-style: italic;
+      color: #34495e;
     }
     
     /* Table Styling */
@@ -277,6 +377,10 @@
       padding: 12px;
       text-align: left;
       border-bottom: 1px solid #ecf0f1;
+    }
+    
+    .markdown-section table td {
+      color: #34495e;
     }
     
     .markdown-section table tr:hover {
@@ -417,6 +521,7 @@
     .markdown-section li {
       margin-bottom: 8px;
       line-height: 1.8;
+      color: #34495e;
     }
     
     /* Emphasis Colors */
@@ -472,7 +577,7 @@
       
       /* Footer */
       footer: {
-        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fas fa-code"></i> Codeforces</a></span>',
+        copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fab fa-codeforces"></i> Codeforces</a></span>',
         auth: '',
         pre: '<hr/>',
         style: 'text-align: center; padding: 20px;'
