@@ -27,14 +27,6 @@
       --background-color: #ffffff;
       --sidebar-background: #f8f9fa;
       --code-background: #f4f4f4;
-      
-      /* Dark Mode Colors */
-      --dark-primary: #1a1a1a;
-      --dark-secondary: #2d3748;
-      --dark-text: #e2e8f0;
-      --dark-link: #63b3ed;
-      --dark-background: #0d1117;
-      --dark-sidebar: #161b22;
     }
     
     * {
@@ -46,34 +38,135 @@
     html, body {
       font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, "Helvetica Neue", Arial, sans-serif;
       line-height: 1.6;
-      color: var(--text-color);
-      background-color: var(--background-color);
-      transition: background-color 0.3s ease, color 0.3s ease;
     }
     
-    /* Dark Mode Toggle */
+    /* ===== DARK MODE STYLES ===== */
     body.dark-mode {
-      background-color: var(--dark-background);
-      color: var(--dark-text);
+      background-color: #0d1117 !important;
+      color: #e2e8f0 !important;
     }
     
     body.dark-mode .sidebar {
-      background-color: var(--dark-sidebar) !important;
+      background-color: #161b22 !important;
+      border-right-color: #30363d !important;
+    }
+    
+    body.dark-mode .sidebar-nav {
+      background-color: #0d1117 !important;
+    }
+    
+    body.dark-mode .sidebar-nav li a {
+      color: #c9d1d9 !important;
+    }
+    
+    body.dark-mode .sidebar-nav li a:hover {
+      background-color: #3498db !important;
+      color: white !important;
+    }
+    
+    body.dark-mode .sidebar-nav li.active > a {
+      background: linear-gradient(135deg, #3498db, #2980b9) !important;
+      color: white !important;
     }
     
     body.dark-mode .content {
-      color: var(--dark-text);
+      color: #e2e8f0 !important;
+      background-color: #0d1117 !important;
+    }
+    
+    body.dark-mode .markdown-section {
+      color: #e2e8f0 !important;
+    }
+    
+    body.dark-mode .markdown-section h1,
+    body.dark-mode .markdown-section h2,
+    body.dark-mode .markdown-section h3,
+    body.dark-mode .markdown-section h4,
+    body.dark-mode .markdown-section h5,
+    body.dark-mode .markdown-section h6 {
+      color: #e2e8f0 !important;
+      border-color: #3498db !important;
+    }
+    
+    body.dark-mode .markdown-section code {
+      background-color: #161b22 !important;
+      color: #79c0ff !important;
+    }
+    
+    body.dark-mode .markdown-section pre {
+      background-color: #0d1117 !important;
+      color: #e2e8f0 !important;
+      border-left-color: #3498db !important;
+    }
+    
+    body.dark-mode .markdown-section blockquote {
+      background-color: rgba(52, 152, 219, 0.15) !important;
+      border-left-color: #3498db !important;
+      color: #a8b9d9 !important;
+    }
+    
+    body.dark-mode .markdown-section a {
+      color: #58a6ff !important;
+    }
+    
+    body.dark-mode .markdown-section a:hover {
+      color: #79c0ff !important;
+    }
+    
+    body.dark-mode .markdown-section table {
+      border-color: #30363d !important;
+    }
+    
+    body.dark-mode .markdown-section table th {
+      background-color: #3498db !important;
+      color: white !important;
+    }
+    
+    body.dark-mode .markdown-section table td {
+      border-color: #30363d !important;
+    }
+    
+    body.dark-mode .markdown-section table tr:hover {
+      background-color: rgba(52, 152, 219, 0.1) !important;
+    }
+    
+    body.dark-mode .search input {
+      background-color: #0d1117 !important;
+      color: #e2e8f0 !important;
+      border-color: #30363d !important;
+    }
+    
+    body.dark-mode .search input::placeholder {
+      color: #8b949e !important;
+    }
+    
+    body.dark-mode .search .search-keyword {
+      color: #ffa657 !important;
+    }
+    
+    body.dark-mode .footer {
+      background: linear-gradient(135deg, #1a1a2e, #16213e) !important;
+      color: #e2e8f0 !important;
+      border-top-color: #30363d !important;
+    }
+    
+    body.dark-mode .footer a {
+      color: #58a6ff !important;
+    }
+    
+    body.dark-mode .footer a:hover {
+      color: #79c0ff !important;
     }
     
     /* Enhanced Sidebar */
     .sidebar {
-      background-color: var(--sidebar-background);
-      border-right: 2px solid var(--border-color);
+      background-color: #f8f9fa;
+      border-right: 2px solid #ecf0f1;
       transition: all 0.3s ease;
     }
     
     .sidebar ul li a {
-      color: var(--text-color);
+      color: #34495e;
       border-radius: 4px;
       transition: all 0.2s ease;
       padding: 8px 12px;
@@ -81,13 +174,13 @@
     }
     
     .sidebar ul li a:hover {
-      background-color: var(--secondary-color);
+      background-color: #3498db;
       color: white;
       transform: translateX(4px);
     }
     
     .sidebar ul li.active > a {
-      background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+      background: linear-gradient(135deg, #3498db, #2980b9);
       color: white;
       font-weight: bold;
       box-shadow: 0 2px 8px rgba(52, 152, 219, 0.3);
@@ -101,30 +194,31 @@
     
     .markdown-section h1 {
       font-size: 2.5em;
-      border-bottom: 3px solid var(--secondary-color);
+      border-bottom: 3px solid #3498db;
       padding-bottom: 15px;
       margin-bottom: 30px;
+      color: #2c3e50;
     }
     
     .markdown-section h2 {
       font-size: 2em;
-      color: var(--primary-color);
+      color: #2c3e50;
       margin-top: 30px;
       margin-bottom: 15px;
-      border-left: 4px solid var(--secondary-color);
+      border-left: 4px solid #3498db;
       padding-left: 12px;
     }
     
     .markdown-section h3 {
       font-size: 1.5em;
-      color: var(--secondary-color);
+      color: #3498db;
       margin-top: 20px;
       margin-bottom: 10px;
     }
     
     /* Code Block Styling */
     .markdown-section code {
-      background-color: var(--code-background);
+      background-color: #f4f4f4;
       color: #d63384;
       padding: 2px 6px;
       border-radius: 3px;
@@ -132,8 +226,8 @@
     }
     
     .markdown-section pre {
-      background-color: var(--code-background);
-      border-left: 4px solid var(--secondary-color);
+      background-color: #f4f4f4;
+      border-left: 4px solid #3498db;
       border-radius: 4px;
       overflow-x: auto;
     }
@@ -146,19 +240,19 @@
     
     /* Link Styling */
     .markdown-section a {
-      color: var(--link-color);
+      color: #3498db;
       text-decoration: none;
       border-bottom: 2px solid transparent;
       transition: all 0.2s ease;
     }
     
     .markdown-section a:hover {
-      border-bottom-color: var(--link-color);
+      border-bottom-color: #3498db;
     }
     
     /* Quote Styling */
     .markdown-section blockquote {
-      border-left: 4px solid var(--secondary-color);
+      border-left: 4px solid #3498db;
       background-color: rgba(52, 152, 219, 0.1);
       padding: 15px 20px;
       margin: 20px 0;
@@ -174,7 +268,7 @@
     }
     
     .markdown-section table thead {
-      background-color: var(--secondary-color);
+      background-color: #3498db;
       color: white;
     }
     
@@ -182,7 +276,7 @@
     .markdown-section table td {
       padding: 12px;
       text-align: left;
-      border-bottom: 1px solid var(--border-color);
+      border-bottom: 1px solid #ecf0f1;
     }
     
     .markdown-section table tr:hover {
@@ -194,7 +288,7 @@
       position: fixed;
       bottom: 30px;
       right: 30px;
-      background: linear-gradient(135deg, var(--secondary-color), #2980b9);
+      background: linear-gradient(135deg, #3498db, #2980b9);
       color: white;
       width: 50px;
       height: 50px;
@@ -224,7 +318,7 @@
       position: fixed;
       bottom: 30px;
       right: 90px;
-      background: var(--secondary-color);
+      background: #3498db;
       color: white;
       border: none;
       width: 50px;
@@ -246,12 +340,12 @@
     }
     
     body.dark-mode .theme-toggle {
-      background-color: #f39c12;
-      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4);
+      background-color: #f39c12 !important;
+      box-shadow: 0 4px 12px rgba(243, 156, 18, 0.4) !important;
     }
     
     body.dark-mode .theme-toggle:hover {
-      box-shadow: 0 6px 16px rgba(243, 156, 18, 0.6);
+      box-shadow: 0 6px 16px rgba(243, 156, 18, 0.6) !important;
     }
     
     /* Loading Animation */
@@ -259,9 +353,9 @@
       display: inline-block;
       width: 20px;
       height: 20px;
-      border: 3px solid var(--border-color);
+      border: 3px solid #ecf0f1;
       border-radius: 50%;
-      border-top-color: var(--secondary-color);
+      border-top-color: #3498db;
       animation: spin 0.6s linear infinite;
     }
     
@@ -271,12 +365,12 @@
     
     /* Footer Enhancement */
     .footer {
-      background: linear-gradient(135deg, var(--primary-color), var(--secondary-color));
+      background: linear-gradient(135deg, #2c3e50, #3498db);
       color: white;
       padding: 30px;
       text-align: center;
       margin-top: 40px;
-      border-top: 2px solid var(--border-color);
+      border-top: 2px solid #ecf0f1;
     }
     
     .footer a {
@@ -288,11 +382,6 @@
     .footer a:hover {
       color: white;
       text-decoration: underline;
-    }
-    
-    /* Navigation Bar */
-    nav.navbar {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
     }
     
     /* Responsive Design */
@@ -332,12 +421,11 @@
     
     /* Emphasis Colors */
     .markdown-section strong {
-      color: var(--secondary-color);
+      color: #3498db;
       font-weight: 600;
     }
     
     .markdown-section em {
-      color: var(--text-color);
       font-style: italic;
     }
   </style>
@@ -387,7 +475,7 @@
         copy: '<span>© 2026 TheUserWW | <a href="https://github.com/TheUserWW" target="_blank"><i class="fab fa-github"></i> GitHub</a> | <a href="https://codeforces.com/profile/TheUserWW" target="_blank"><i class="fas fa-code"></i> Codeforces</a></span>',
         auth: '',
         pre: '<hr/>',
-        style: 'text-align: center; padding: 20px; background: linear-gradient(135deg, #2c3e50, #3498db); color: white; border-top: 2px solid #ecf0f1;'
+        style: 'text-align: center; padding: 20px;'
       },
       
       /* Plugins Configuration */
