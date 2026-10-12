@@ -145,6 +145,49 @@
     :root[data-theme="dark"] #theme-toggle { background: #e8a33d; color: #1a1a1a; }
     :focus-visible { outline: 2px solid var(--accent); outline-offset: 2px; }
 
+    /* ===== Side Panel for Solutions ===== */
+    .solution-panel {
+      position: fixed;
+      top: 0;
+      right: -400px; /* Hidden by default, slide in from right */
+      width: 400px; /* Adjust width as needed */
+      height: 100%;
+      background: var(--bg-alt);
+      border-left: 1px solid var(--border);
+      box-shadow: -4px 0 10px rgba(0, 0, 0, .1);
+      z-index: 1000;
+      overflow-y: auto;
+      transition: right 0.3s ease-in-out;
+      padding: 20px;
+    }
+    .solution-panel.open {
+      right: 0;
+    }
+    .solution-panel-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 20px;
+    }
+    .solution-panel-header h2 {
+      margin: 0;
+      color: var(--text);
+    }
+    .solution-panel-close {
+      background: none;
+      border: none;
+      font-size: 24px;
+      cursor: pointer;
+      color: var(--muted);
+      transition: color 0.2s ease;
+    }
+    .solution-panel-close:hover {
+      color: var(--accent);
+    }
+    .solution-panel-content {
+      color: var(--text);
+    }
+
     .loading-spinner {
       display: inline-block; width: 18px; height: 18px; vertical-align: middle;
       border: 3px solid var(--border); border-top-color: var(--accent);
@@ -169,6 +212,17 @@
   <div class="fab-group">
     <button id="back-to-top" class="fab" title="Back to top" aria-label="Back to top"><i class="fas fa-arrow-up"></i></button>
     <button id="theme-toggle" class="fab" title="Toggle dark mode" aria-label="Toggle dark mode" aria-pressed="false"><i class="fas fa-moon"></i></button>
+  </div>
+
+  <div id="solution-panel" class="solution-panel">
+    <div class="solution-panel-header">
+      <h2>我的题解</h2>
+      <button class="solution-panel-close" aria-label="Close solutions panel">&times;</button>
+    </div>
+    <div class="solution-panel-content">
+      <!-- Solutions will be loaded here -->
+      <span class="loading-spinner"></span> 正在加载题解...
+    </div>
   </div>
 
   <script>
@@ -264,6 +318,66 @@
         if ((e.key === '/' && !typing) || (e.key === '/' && (e.ctrlKey || e.metaKey))) {
           var input = document.querySelector('.sidebar .search input');
           if (input) { e.preventDefault(); input.focus(); }
+        }
+      });
+
+      // Solutions Panel Logic
+      var solutionPanel = document.getElementById('solution-panel');
+      var solutionPanelClose = solutionPanel.querySelector('.solution-panel-close');
+      var solutionPanelContent = solutionPanel.querySelector('.solution-panel-content');
+
+      // Docsify app name link (CP Notes)
+      // Docsify renders nameLink in .sidebar .app-name-link or .app-name
+      // We will look for .sidebar .app-name-link first, then .app-name
+      var cpNotesLink = document.querySelector('.sidebar .app-name-link');
+      if (!cpNotesLink) {
+        cpNotesLink = document.querySelector('.app-name');
+      }
+
+      function openSolutionPanel(event) {
+        event.preventDefault(); // Prevent default Docsify navigation
+        solutionPanel.classList.add('open');
+        // Load solutions content if not already loaded
+        if (solutionPanelContent.innerHTML.includes('正在加载题解')) {
+          // Use Docsify's internal fetch mechanism to get Markdown content
+          Docsify.get('Solutions/index.md')
+            .then(function(markdownContent) {
+              if (markdownContent) {
+                // Docsify doesn't expose a direct Markdown renderer easily to external scripts.
+                // We will manually render basic markdown for now, or just display raw markdown.
+                // For simplicity, we'll just display the raw content for now.
+                solutionPanelContent.innerHTML = markdownContent;
+              } else {
+                solutionPanelContent.innerHTML = '无法加载题解内容。';
+              }
+            })
+            .catch(function(error) {
+              console.error('Error loading solutions:', error);
+              solutionPanelContent.innerHTML = '加载题解失败，请检查文件路径。';
+            });
+        }
+      }
+
+      function closeSolutionPanel() {
+        solutionPanel.classList.remove('open');
+      }
+
+      if (cpNotesLink) {
+        cpNotesLink.addEventListener('click', openSolutionPanel);
+      }
+      solutionPanelClose.addEventListener('click', closeSolutionPanel);
+
+      // Close panel if clicking outside (optional, but good UX)
+      document.addEventListener('click', function(event) {
+        if (!solutionPanel.contains(event.target) && !cpNotesLink.contains(event.target) && solutionPanel.classList.contains('open')) {
+          closeSolutionPanel();
+        }
+      });
+
+      // Close panel with Escape key
+      document.addEventListener('keydown', function(event) {
+        if (event.key === 'Escape' && solutionPanel.classList.contains('open')) {
+          closeSolutionPanel();
         }
       });
     })();
