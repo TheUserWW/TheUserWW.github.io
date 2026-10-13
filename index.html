@@ -327,29 +327,25 @@
       var solutionPanelContent = solutionPanel.querySelector('.solution-panel-content');
 
       // Docsify app name link (CP Notes)
-      // Docsify renders nameLink in .sidebar .app-name-link or .app-name
-      // We will look for .sidebar .app-name-link first, then .app-name
-      var cpNotesLink = document.querySelector('.sidebar .app-name-link');
-      if (!cpNotesLink) {
-        cpNotesLink = document.querySelector('.app-name');
-      }
+      // We use event delegation because Docsify renders the sidebar asynchronously
+      function handleCpNotesClick(event) {
+        var target = event.target.closest('.app-name-link, .app-name');
+        if (!target) return;
 
-      function openSolutionPanel(event) {
         event.preventDefault(); // Prevent default Docsify navigation
         solutionPanel.classList.add('open');
+
         // Load solutions content if not already loaded
         if (solutionPanelContent.innerHTML.includes('正在加载题解')) {
-          // Use Docsify's internal fetch mechanism to get Markdown content
-          Docsify.get('Solutions/index.md')
+          fetch('Solutions/index.md')
+            .then(function(response) {
+              if (!response.ok) throw new Error('Failed to load solutions');
+              return response.text();
+            })
             .then(function(markdownContent) {
-              if (markdownContent) {
-                // Docsify doesn't expose a direct Markdown renderer easily to external scripts.
-                // We will manually render basic markdown for now, or just display raw markdown.
-                // For simplicity, we'll just display the raw content for now.
-                solutionPanelContent.innerHTML = markdownContent;
-              } else {
-                solutionPanelContent.innerHTML = '无法加载题解内容。';
-              }
+              // Basic rendering: replace newlines with <br> or wrap in <pre>
+              // For a better experience, we could use a markdown parser if one was loaded
+              solutionPanelContent.innerHTML = '<div style="white-space: pre-wrap; font-family: inherit;">' + markdownContent + '</div>';
             })
             .catch(function(error) {
               console.error('Error loading solutions:', error);
@@ -362,14 +358,15 @@
         solutionPanel.classList.remove('open');
       }
 
-      if (cpNotesLink) {
-        cpNotesLink.addEventListener('click', openSolutionPanel);
-      }
+      document.addEventListener('click', handleCpNotesClick);
       solutionPanelClose.addEventListener('click', closeSolutionPanel);
 
-      // Close panel if clicking outside (optional, but good UX)
+      // Close panel if clicking outside
       document.addEventListener('click', function(event) {
-        if (!solutionPanel.contains(event.target) && !cpNotesLink.contains(event.target) && solutionPanel.classList.contains('open')) {
+        var isClickInside = solutionPanel.contains(event.target);
+        var isClickOnLink = event.target.closest('.app-name-link, .app-name');
+        
+        if (!isClickInside && !isClickOnLink && solutionPanel.classList.contains('open')) {
           closeSolutionPanel();
         }
       });
