@@ -6,23 +6,21 @@ This page links to my competitive programming notes and source code in the repos
 
 ### CF938D - Buy a Ticket
 
-- [Solution Page](CF938D.md)
-- Solution note: [CF938D.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.md)
-- C++ source: [CF938D.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.cpp)
+- [View Solution (Web Page)](/CF938D.md)
+- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.cpp)
 
 ### CF1195C - Basketball Exercise
 
-- [Solution Page](CF1195C.md)
-- Solution note: [CF1195C.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.md)
-- C++ source: [CF1195C.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.cpp)
+- [View Solution (Web Page)](/CF1195C.md)
+- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.cpp)
 
 ### CF977E - Cyclic Components
 
-- C++ source: [CF977E.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF977E.cpp)
+- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF977E.cpp)
 
 ### CF20C - Dijkstra?
 
-- C++ source: [CF20C.cpp](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF20C.cpp)
+- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF20C.cpp)
 
 ## Topic Indexes
 
