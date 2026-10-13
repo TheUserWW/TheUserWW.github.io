@@ -6,27 +6,27 @@ This page links to my competitive programming notes and source code in the repos
 
 ### CF938D - Buy a Ticket
 
-- [View Solution (Web Page)](/CF938D.md)
-- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF938D.cpp)
+- [View Solution (Web Page)](/CompetitiveProgramming/CodeForces/CF938D.md)
+- [Source Code (Local)](/CompetitiveProgramming/CodeForces/CF938D.cpp)
 
 ### CF1195C - Basketball Exercise
 
-- [View Solution (Web Page)](/CF1195C.md)
-- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF1195C.cpp)
+- [View Solution (Web Page)](/CompetitiveProgramming/CodeForces/CF1195C.md)
+- [Source Code (Local)](/CompetitiveProgramming/CodeForces/CF1195C.cpp)
 
 ### CF977E - Cyclic Components
 
-- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF977E.cpp)
+- [Source Code (Local)](/CompetitiveProgramming/CodeForces/CF977E.cpp)
 
 ### CF20C - Dijkstra?
 
-- [Source Code (GitHub)](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/CodeForces/CF20C.cpp)
+- [Source Code (Local)](/CompetitiveProgramming/CodeForces/CF20C.cpp)
 
 ## Topic Indexes
 
-- Dynamic Programming: [DynamicProgramming.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/index/DynamicProgramming.md)
-- Binary Search: [BinarySearch.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/index/BinarySearch.md)
-- Graph Theory: [GraphTheory.md](https://github.com/TheUserWW/CompetitiveProgramming/blob/main/index/GraphTheory.md)
+- Dynamic Programming: [DynamicProgramming.md](/CompetitiveProgramming/index/DynamicProgramming.md)
+- Binary Search: [BinarySearch.md](/CompetitiveProgramming/index/BinarySearch.md)
+- Graph Theory: [GraphTheory.md](/CompetitiveProgramming/index/GraphTheory.md)
 
 ## Repository
 
